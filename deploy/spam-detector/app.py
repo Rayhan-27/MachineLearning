@@ -2,6 +2,9 @@ import streamlit as st
 import joblib
 import re
 import time
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ======================================================
 # KONFIGURASI HALAMAN
@@ -270,8 +273,8 @@ st.markdown("""
 # ======================================================
 @st.cache_resource
 def load_artifacts():
-    model = joblib.load("spam_model_svm.pkl")
-    tfidf = joblib.load("tfidf_vectorizer.pkl")
+    model = joblib.load(os.path.join(BASE_DIR, "spam_model_svm.pkl"))
+    tfidf = joblib.load(os.path.join(BASE_DIR, "tfidf_vectorizer.pkl"))
     return model, tfidf
 
 try:
