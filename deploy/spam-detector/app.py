@@ -325,17 +325,6 @@ if load_error:
     st.stop()
 
 # ======================================================
-# STAT PILLS
-# ======================================================
-st.markdown("""
-    <div class="stats-row">
-        <div class="stat-pill"><span class="num">98.3%</span><span class="lbl">Akurasi</span></div>
-        <div class="stat-pill"><span class="num">5.171</span><span class="lbl">Data Latih</span></div>
-        <div class="stat-pill"><span class="num">5.000</span><span class="lbl">Fitur TF-IDF</span></div>
-    </div>
-""", unsafe_allow_html=True)
-
-# ======================================================
 # LANGUAGE NOTICE
 # ======================================================
 st.markdown("""
@@ -395,26 +384,24 @@ if check_btn:
 
         confidence_html = ""
         if confidence is not None:
-            confidence_html = f"""
-                <div class="confidence-wrap">
-                    <div class="confidence-label">
-                        <span>Tingkat keyakinan</span>
-                        <span><b>{confidence:.1f}%</b></span>
-                    </div>
-                    <div class="confidence-bar-bg">
-                        <div class="confidence-bar-fill" style="width:{confidence}%; background:{bar_color};"></div>
-                    </div>
-                </div>
-            """
+            confidence_html = (
+                f'<div class="confidence-wrap">'
+                f'<div class="confidence-label"><span>Tingkat keyakinan</span>'
+                f'<span><b>{confidence:.1f}%</b></span></div>'
+                f'<div class="confidence-bar-bg">'
+                f'<div class="confidence-bar-fill" style="width:{confidence}%; background:{bar_color};"></div>'
+                f'</div></div>'
+            )
 
-        st.markdown(f"""
-            <div class="result-box {box_class}">
-                <div class="icon-circle"><span>{icon}</span></div>
-                <div class="label">{title}</div>
-                <div class="sub">{sub}</div>
-                {confidence_html}
-            </div>
-        """, unsafe_allow_html=True)
+        result_html = (
+            f'<div class="result-box {box_class}">'
+            f'<div class="icon-circle"><span>{icon}</span></div>'
+            f'<div class="label">{title}</div>'
+            f'<div class="sub">{sub}</div>'
+            f'{confidence_html}'
+            f'</div>'
+        )
+        st.markdown(result_html, unsafe_allow_html=True)
 
         col1, col2 = st.columns(2)
         with col1:
